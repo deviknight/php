@@ -1,34 +1,24 @@
 <?php
-require_once("/config/db.class.php");
-
-class Product
-{
-	public $productID;
-	public $productName;
-	public $cateID;
-	public $price;
-	public $quantity;
-	public $description;
-	public $picture;
-	
-	public function __construct($pro_name,$cate_id,$price,$quantity,$desc,$picture){
-		$this->productName = $pro_name;
-		$this->cateID = $cate_id;
-		$this->price = $price;
-		$this->quantity = $quantity;
-		$this->description = $description;
-		$this->picture = $picture;
-	}
-	
-	//luu san pham
-	public function save(){
-		$db = new Db();
-		// them product vao co so du lieu
-		$sql = "insert into product(ProductName,CateID,Price,Quantity,Description,Picture) values ('$this->productName','$this->CateID','$this->price','$this->quantity,'$this->description'','$this->picture')";
-		
-		$result = $db->query_execute($sql):
-		return $result;
-	}
-}
-
+	require_once("/xampp/htdocs/lab03/Entities/product.class.php");	
+?>
+<?php
+	include_once("header.php");
+	$prods = Product::list_product();
+	?>
+<div class="container text-center">
+<h3>San pham cua hang</h3><br>
+<div class="row">
+<?php
+	foreach($prods as $item){
+		?>
+		<div class="col-sm-4">
+			<img src="<?php echo "/lab03/".$item["Picture"];?>" class="img-responsive" style="width:100%" alt="Image">
+			<p class="text-danger"><?php echo $item["ProductName"];?></p>
+			<p class-"text-info"><?php echo $item["Price"];?></p>
+			<p>
+			<button type="button" class="btn btn-primary">Mua hang</button>
+			</p>
+		</div>
+	<?php } ?>
+<?php	include_once("footer.php");
 ?>

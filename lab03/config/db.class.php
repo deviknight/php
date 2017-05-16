@@ -18,7 +18,7 @@ class Db{
 	// ham thuc hien truy van
 	public function query_execute($queryString){
 		$connection = $this->connect();
-		
+		$connection->query("SET NAME utf8");
 		$result = $connection->query($queryString);
 		$connection->close();
 		return $result;
@@ -34,7 +34,7 @@ class Db{
 		while($item = $result->fetch_assoc()){
 			$rows[]=$item;
 		}
-		return rows;
+		return $rows;
 	}
 	
 }

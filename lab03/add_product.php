@@ -1,5 +1,7 @@
 <?php
-require_once("/Entities/product.class.php");
+require_once("/xampp/htdocs/lab03/Entities/product.class.php");
+require_once("/xampp/htdocs/lab03/Entities/category.class.php");
+
 
 if(isset($_POST["btnSubmit"])){
 	$productName = $_POST["txtName"];
@@ -7,7 +9,7 @@ if(isset($_POST["btnSubmit"])){
 	$price = $_POST["txtPrice"];
 	$quantity = $_POST["txtQuantity"];
 	$description = $_POST["txtDesc"];
-	$picture = $_POST["txtPicture"];
+	$picture = $_FILES["txtPicture"];
 	
 	
 	$newProduct = new Product($productName,$cateID,$price,$quantity,$description,$picture);
@@ -49,20 +51,12 @@ if(isset($_POST["btnSubmit"])){
 		</div>
 		
 		<div class="lblInput">
-			<input type="text" name="txtDesc" value="<?php echo isset($_POST["txtDesc"]) ? $_POST["txtDesc"] :"";?>"/>
+			<textarea name="comment" rows="5" cols="40"><?php echo $comment;?></textarea>
 		</div>
 	</div>
 		
 	
-	<div class="row">
-		<div class="lblTitle">
-			<label>Category</label>
-		</div>
-		
-		<div class="lblInput">
-			<input type="text" name="txtCateID" value="<?php echo isset($_POST["txtCateID"]) ? $_POST["txtCateID"] :"";?>"/>
-		</div>
-	</div>
+	
 	
 	<div class="row">
 		<div class="lblTitle">
@@ -70,7 +64,7 @@ if(isset($_POST["btnSubmit"])){
 		</div>
 		
 		<div class="lblInput">
-			<input type="text" name="txtQuantity" value="<?php echo isset($_POST["txtQuantity"]) ? $_POST["txtQuantity"] :"";?>"/>
+			<input type="number" name="txtQuantity" value="<?php echo isset($_POST["txtQuantity"]) ? $_POST["txtQuantity"] :"";?>"/>
 		</div>
 	</div>
 	
@@ -80,17 +74,33 @@ if(isset($_POST["btnSubmit"])){
 		</div>
 		
 		<div class="lblInput">
-			<input type="text" name="txtPrice" value="<?php echo isset($_POST["txtPrice"]) ? $_POST["txtPrice"] :"";?>"/>
+			<input type="number" name="txtPrice" value="<?php echo isset($_POST["txtPrice"]) ? $_POST["txtPrice"] :"";?>"/>
 		</div>
 	</div>
-	
+	<!-- loại sản phẩm -->
+	<div class="row">
+	<div class="lblTitle">
+	<label>Chon loai san pham</label>
+	</div>
+	<div class="lblInput">
+	<select name="txtCateID">
+	<option value="" selected>--Chon loai--</option>
+	<?php
+	$cates= Category::list_category();
+	foreach($cates as $item) {
+		echo"<option value=".$item[CateID].">".$item["CategoryName"]."</option>";
+	}
+	?>
+	</select>
+	</div>
+	</div>
 	<div class="row">
 		<div class="lblTitle">
 			<label>Hinh anh</label>
 		</div>
 		
 		<div class="lblInput">
-			<input type="text" name="txtPicture" value="<?php echo isset($_POST["txtPicture"]) ? $_POST["txtPicture"] :"";?>"/>
+			<input type="file" id="txtPicture" name="txtPicture" accept=".PNG,.GIF,.JPG">
 		</div>
 	</div>
 	

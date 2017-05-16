@@ -1,5 +1,5 @@
 <?php
-require_once("/config/db.class.php");
+require_once("/xampp/htdocs/lab03/config/db.class.php");
 
 class Product
 {
@@ -22,11 +22,27 @@ class Product
 	
 	//luu san pham
 	public function save(){
+		//xu ly upload
+		$file_temp=$this->picture['tmp_name'];
+		$user_file = $this->picture['name'];
+		$timestamp = date("Y").date("d").date("h").date("i").date("s");
+		$filepath = "uploads/".$timestamp.$user_file;
+		if(move_uploaded_file($file_temp, $filepath)==false)
+		{
+			return false;
+		}
 		$db = new Db();
 		// them product vao co so du lieu
-		$sql = "insert into product(ProductName,CateID,Price,Quantity,Description,Picture) values ('$this->productName','$this->cateID','$this->price','$this->quantity','$this->description','$this->picture')";
-		
+		$sql = "insert into product(ProductName,CateID,Price,Quantity,Description,Picture) values ('$this->productName','$this->cateID','$this->price','$this->quantity','$this->description','$filepath')";
 		$result = $db->query_execute($sql);
+		return $result;
+	}
+
+	// lấy danh sách sản phẩm
+	public static function list_product(){
+		$db = new Db();
+		$sql = "select * from product";
+		$result = $db->select_to_array($sql);
 		return $result;
 	}
 }

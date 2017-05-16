@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="vi>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="author" content="Huynh Minh Nhut"/>
+    <link href="/lab01/site.css" rel="stylesheet"/>
+    <title>Xep loai ket qua tuyen sinh</title>
+</head>
+<body>
+
+<div id="wrapper">
+    <h2>Xep loa ket qua tuyen sinh</h2>
+    <form action="#" method="POST">
+        <div class="row">
+            <div class="lblTitle">
+                <label>Điểm môn toán</label>
+            </div>
+
+             <div class="lblInput">
+               <input type="number" name="Toan" 
+               value="<?php echo isset($_POST["Toan"])?$_POST["Toan"]:"";?>"/>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

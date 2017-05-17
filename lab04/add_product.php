@@ -40,7 +40,7 @@ if(isset($_POST["btnSubmit"])){
 ?>
 <div class="container text-center">
   <h2>Thêm sản phẩm</h2>
-<form  class="form-horizontal" method="post">
+<form  class="form-horizontal" method="post" enctype="multipart/form-data">
 	<div class="form-group">		
 			<label class="control-label col-sm-2">Tên sản phẩm</label>						
 			 <div class="col-sm-10">
@@ -51,8 +51,7 @@ if(isset($_POST["btnSubmit"])){
 	<div class="form-group">		
 			<label class="control-label col-sm-2">Mô tả sản phẩm</label>				
 		<div class="col-sm-10">
-			<textarea  class="form-control" rows="5" name="txtDesc" value="<?php echo isset($_POST["txtDesc"]) ? $_POST["txtDesc"] : "" ;?>"></textarea>
-			<!-- <input class="form-control" type="text" name="txtDesc" value="<?php echo isset($_POST["txtDesc"]) ? $_POST["txtDesc"] : "" ;?>"/> -->
+			<textarea  class="form-control" rows="5" name="txtDesc" value="<?php echo isset($_POST["txtDesc"]) ? $_POST["txtDesc"] : "" ;?>"></textarea>			
 		</div>
 	</div>
 					
@@ -82,7 +81,7 @@ if(isset($_POST["btnSubmit"])){
 	<?php
 	$cates= Category::list_category();
 	foreach($cates as $item) {
-		echo"<option value=".$item["CateID"].">".$item["CategoryName"]."</option>";
+		echo "<option value=".$item["CateID"].">".$item["CategoryName"]."</option>";
 	}
 	?>
 	</select>
@@ -92,7 +91,7 @@ if(isset($_POST["btnSubmit"])){
 			<label class="control-label col-sm-2">Hình</label>		
 		
 		<div class="col-sm-10">
-			<input type="file" id="txtPicture" name="txtPicture" accept=".PNG,.GIF,.JPG">
+			<input type="file" id="txtPicture" name="txtPicture" accept=".PNG,.GIF,.JPG">			
 		</div>
 	</div>
 	

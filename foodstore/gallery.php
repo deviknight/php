@@ -22,13 +22,14 @@ $cates = Category::list_category();
 					<div class="col-md-4 gallery-grid wow fadeInUp animated" data-wow-delay=".5s">
 						<div class="grid">
 							<figure class="effect-apollo">
-								<a class="example-image-link" href="images/g1.jpg" data-lightbox="example-set" data-title="">									
-                  <!-- <img src="<?php echo "".$item["Picture"];?>" alt=""> -->
-                  <img src="images/g9.jpg" alt="" />
-									<figcaption>
-										<!--<?php echo "<h3><a
-                              href=/foodstore/list_product.php?cateid=".$item["CateID"].">".$item["CategoryName"]."</a></h3>";
-										?> -->
+								<!-- <a class="example-image-link" href="images/g1.jpg" data-lightbox="example-set" data-title="">-->
+								
+                   <img src="<?php echo "".$item["Picture"];?>" alt="">
+									 <?php
+									 		echo  "<a href=\"foodstore/list_product.php?cateid=".$item["CateID"]."\"><img src=\"homelogo.jpg\"  /></a>";
+									  ?>
+                  <!-- <img src="images/g9.jpg" alt="" /> -->
+									<figcaption>										
                     <?php echo "<h3> ".$item["CategoryName"]."</h3>";
 										?>
 										

@@ -1,10 +1,10 @@
-<?php include_once('header.php');?>
+<?php include('pageheader.php');?>
   <?php
-require_once("sun/xampp/htdocs/foodstore/Entities/product.class.php");
-require_once("sun/xampp/htdocs/foodstore/Entities/category.class.php");
+require_once("/xampp/htdocs/foodstore/Entities/product.class.php");
+require_once("/xampp/htdocs/foodstore/Entities/category.class.php");
 $cates = Category::list_category();
 
-session_start();
+#session_start();
 
 error_reporting(E_ALL);
 
@@ -15,7 +15,7 @@ if(isset($_GET["id"])){
     $was_found = false;
     $i = 0;
     if(!isset($_SESSION["cart_items"]) || count($_SESSION["cart_items"])<1){
-        $_SESSION["cart_items"] = array(0=> array(pro_id => $pro_id,"quantity"=>1));
+        $_SESSION["cart_items"] = array(0=> array($pro_id => $pro_id,"quantity"=>1));
     }
     else{
         foreach($_SESSION["cart_items"] as $item){
@@ -33,22 +33,14 @@ if(isset($_GET["id"])){
             array_push($_SESSION["cart_items"], array("pro_id"=>$pro_id, "quantity"=>1));
         }
     }
-    header("location: shopping_cart.php");
+   # header("location: shopping_cart.php");
 }
 ?>
  <!--Thong tin tang shopping cart-->
 <div class="container text-center">
-    <div class="col-sm-3">
-        <h3>Danh mục</h3>
-        <ul class = "list-group">
-            <?php
-            foreach($cates as $item){
-                echo "<li class = 'list-group-item'><a
-                href=/foodstore/list_product.php?cateid=".$item["CateID"].">".$item["CategoryName"]."</a></li>";
-            }?>
-        </ul>
-        </div>
-    <div class="col-sm-9">
+    <!-- need to add header menu-->
+
+    <div class="col-sm-12">
         <h3>Thông tin giỏ hàng</h3><br>
         <table class="table table-condensed" >
             <thead>

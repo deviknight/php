@@ -5,8 +5,8 @@ session_start();
 ?>
 <?php include('pageheader.php');?>
   <?php
-require_once("/sun/xampp/htdocs/foodstore/Entities/product.class.php");
-require_once("/sun/xampp/htdocs/foodstore/Entities/category.class.php");
+require_once("/xampp/htdocs/foodstore/Entities/product.class.php");
+require_once("/xampp/htdocs/foodstore/Entities/category.class.php");
 $cates = Category::list_category();
 
 // hien thi loi

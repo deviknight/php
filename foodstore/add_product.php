@@ -1,6 +1,6 @@
 <?php
-require_once("/sun/xampp/htdocs/foodstore/Entities/product.class.php");
-require_once("/sun/xampp/htdocs/foodstore/Entities/category.class.php");
+require_once("/xampp/htdocs/foodstore/Entities/product.class.php");
+require_once("/xampp/htdocs/foodstore/Entities/category.class.php");
 
 
 if(isset($_POST["btnSubmit"])){

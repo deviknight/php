@@ -1,6 +1,6 @@
 <?php
-require_once("D:/sun/xampp/htdocs/foodstore/Entities/product.class.php");
-require_once("D:/sun/xampp/htdocs/foodstore/Entities/category.class.php");
+require_once("D:/xampp/htdocs/foodstore/Entities/product.class.php");
+require_once("D:/xampp/htdocs/foodstore/Entities/category.class.php");
 ?>
 <?php
 include_once("pageheader.php");

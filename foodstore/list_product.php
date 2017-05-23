@@ -1,11 +1,8 @@
 <?php
-<<<<<<< HEAD
-require_once("D:/sun/xampp/htdocs/foodstore/Entities/product.class.php");
-require_once("D:/sun/xampp/htdocs/foodstore/Entities/category.class.php");
-=======
-require_once("/xampp/htdocs/foodstore/Entities/product.class.php");
-require_once("/xampp/htdocs/foodstore/Entities/category.class.php");
->>>>>>> a9c83b5550733140686bfffd4e68e368c2b720f5
+
+require_once("D:/xampp/htdocs/foodstore/Entities/product.class.php");
+require_once("D:/xampp/htdocs/foodstore/Entities/category.class.php");
+
 ?>
   <?php
 include_once("pageheader.php");
@@ -43,11 +40,9 @@ $cates = Category::list_category();
 								
 							</figure>
 							<button type="button" class="btn btn-primary" onclick="location.href='/foodstore/shopping_cart.php?id=<?php echo
-<<<<<<< HEAD
+
                 $item["ProductID"];?>'">Mua Hàng</button>
-=======
-                $item["ProductID"];?>'" >Mua Hàng</button>
->>>>>>> a9c83b5550733140686bfffd4e68e368c2b720f5
+
 						</div>
 					</div>
           <?php } ?>                

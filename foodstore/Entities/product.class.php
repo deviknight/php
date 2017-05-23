@@ -1,9 +1,9 @@
 <?php
-<<<<<<< HEAD
-require_once("D:/sun/xampp/htdocs/foodstore/config/db.class.php");
-=======
+
 require_once("D:/xampp/htdocs/foodstore/config/db.class.php");
->>>>>>> a9c83b5550733140686bfffd4e68e368c2b720f5
+
+require_once("D:/xampp/htdocs/foodstore/config/db.class.php");
+
 
 class Product
 {

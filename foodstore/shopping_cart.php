@@ -1,25 +1,17 @@
-<<<<<<< HEAD
+
 <?php
 @ob_start();
 session_start();
 ?>
 <?php include('pageheader.php');?>
   <?php
-require_once("/xampp/htdocs/foodstore/Entities/product.class.php");
-require_once("/xampp/htdocs/foodstore/Entities/category.class.php");
-$cates = Category::list_category();
-
-// hien thi loi
-=======
-<?php include('pageheader.php');?>
-  <?php
-require_once("/xampp/htdocs/foodstore/Entities/product.class.php");
-require_once("/xampp/htdocs/foodstore/Entities/category.class.php");
+require_once("Entities/product.class.php");
+require_once("Entities/category.class.php");
 $cates = Category::list_category();
 
 #session_start();
 
->>>>>>> a9c83b5550733140686bfffd4e68e368c2b720f5
+
 error_reporting(E_ALL);
 
 ini_set('display_errors','1');
@@ -29,11 +21,9 @@ if(isset($_GET["id"])){
     $was_found = false;
     $i = 0;
     if(!isset($_SESSION["cart_items"]) || count($_SESSION["cart_items"])<1){
-<<<<<<< HEAD
+
         $_SESSION["cart_items"] = array(0=> array("pro_id" => $pro_id,"quantity"=>1));
-=======
-        $_SESSION["cart_items"] = array(0=> array($pro_id => $pro_id,"quantity"=>1));
->>>>>>> a9c83b5550733140686bfffd4e68e368c2b720f5
+
     }
     else{
         foreach($_SESSION["cart_items"] as $item){
@@ -51,7 +41,7 @@ if(isset($_GET["id"])){
             array_push($_SESSION["cart_items"], array("pro_id"=>$pro_id, "quantity"=>1));
         }
     }
-   # header("location: shopping_cart.php");
+    header("location: shopping_cart.php");
 }
 ?>
  <!--Thong tin tang shopping cart-->
@@ -70,7 +60,7 @@ if(isset($_GET["id"])){
                         <th>Thành tiền</th>
                 </tr>
             </thead>
-              <tbody>
+              <tbody style="text-align:left">
         <?php
         $total_money = 0;
         if(isset($_SESSION["cart_items"]) && count($_SESSION["cart_items"])>0)
@@ -80,19 +70,32 @@ if(isset($_GET["id"])){
                 $product = Product::get_product($id);
                 $prod = reset($product);
                 $total_money +=$item["quantity"]*$prod["Price"];
-                echo "<tr><td>".$prod["ProductName"]."</td><td><img style='width:90px; height:80px' src=".$prod["Picture"]."
-                </td><td>".$item["quantity"]."</td><td>".$prod["Price"]."</td><td>".$prod["Price"]."</td></tr>";
+                echo "<tr>
+                <td>".$prod["ProductName"]."</td><td><img style='width:90px; height:80px' src=".$prod["Picture"]."
+                </td>                
+                <td>
+                <input type=number required value='".$item["quantity"]."'/>
+                </td>
+                
+                <td>".$prod["Price"]."</td><td>".$prod["Price"]."</td>
+                </tr>";
                 }
                  echo "<tr> <td colspan=5><p class='text-right text-danger'>Tổng tiền: ".$total_money."</p></td> </tr>";
-                  echo "<tr> <td colspan=3><p class='text-right'><button type='button' class='btn btn-primary' onclick=location.href=/foodstore/index.php >Tiếp tục mua hàng</button></p></td>
-                  <td colspan=2><p class='text-right'><button type='button' class='btn btn-success'>Thanh toán</button></p></td></tr>";
+                  #echo "<tr> <td colspan=3><p class='text-right'><button type='button' class='btn btn-primary' onclick=location.href=/foodstore/index.php >Tiếp tục mua hàng</button></p></td>
+                  #<td colspan=2><p class='text-right'><button type='button' class='btn btn-success'>Thanh toán</button></p></td></tr>";
                 }
                 else{
                     echo "Không có sản phẩm nào trong giỏ hàng!!!";
                 }
                 ?>
+                <tr> 
+                    <td colspan=3><p class="text-right"><button type="button" class="btn btn-primary" onclick="location.href=/foodstore/index.php">Tiếp tục mua hàng</button></p></td>
+                    <td colspan=2><p class='text-right'><button type='button' class='btn btn-success' name="btnAddToCart">Thanh toán</button></p></td>
+                    <!-- https://www.codecademy.com/en/forum_questions/5314dc879c4e9d517a000d6d -->
+                </tr>
         </tbody>
-          </table>
+        
+          </table>          
     </div>
     </div>
 

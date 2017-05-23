@@ -7,7 +7,7 @@ if(isset($_SESSION['user'])!="")
 {
     header("Location: index.php");
 }
-require_once("/xampp/htdocs/foodstore/Entities/user.class.php");
+require_once("Entities/user.class.php");
 if(isset($_POST['btn-signup']))
 {
     $u_name = $_POST['txtname'];

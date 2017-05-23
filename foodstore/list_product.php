@@ -1,7 +1,7 @@
 <?php
 
-require_once("D:/xampp/htdocs/foodstore/Entities/product.class.php");
-require_once("D:/xampp/htdocs/foodstore/Entities/category.class.php");
+require_once('Entities/product.class.php');
+require_once('Entities/category.class.php');
 
 ?>
   <?php
@@ -51,5 +51,6 @@ $cates = Category::list_category();
 				</div>
 					</div>
 				</div>
-<!-- //gallery -->
+
+
 <?php	include_once("footer.php");?>

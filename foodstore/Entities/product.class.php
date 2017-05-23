@@ -1,8 +1,8 @@
 <?php
 
-require_once("D:/xampp/htdocs/foodstore/config/db.class.php");
+require_once('config/db.class.php');
 
-require_once("D:/xampp/htdocs/foodstore/config/db.class.php");
+require_once('config/db.class.php');
 
 
 class Product

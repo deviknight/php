@@ -80,8 +80,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<nav class="menu menu--miranda">
 						<ul class="nav navbar-nav menu__list">
 							<li class="menu__item menu__item--current"><a href="index.php" class="menu__link">Home</a></li>
-							<li class="menu__item"><a href="about.html" class=" menu__link">About</a></li>
-							<li class="menu__item"><a href="services.html" class=" menu__link">Services</a></li>
+							<li class="menu__item"><a href="about.php" class=" menu__link">About</a></li>
+							<li class="menu__item"><a href="services.php" class=" menu__link">Services</a></li>
 							<li class="menu__item"><a href="gallery.php" class=" menu__link">Gallery</a></li>
 							<li class="dropdown menu__item">
 						<a href="#" class="dropdown-toggle menu__link"  data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login<span class="caret"></span></a>

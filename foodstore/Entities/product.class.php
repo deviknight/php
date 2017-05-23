@@ -1,5 +1,5 @@
 <?php
-require_once("/sun/xampp/htdocs/foodstore/config/db.class.php");
+require_once("D:/sun/xampp/htdocs/foodstore/config/db.class.php");
 
 class Product
 {

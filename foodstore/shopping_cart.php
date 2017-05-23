@@ -1,11 +1,14 @@
-<?php include_once('header.php');?>
+<?php
+@ob_start();
+session_start();
+?>
+<?php include('pageheader.php');?>
   <?php
-require_once("sun/xampp/htdocs/foodstore/Entities/product.class.php");
-require_once("sun/xampp/htdocs/foodstore/Entities/category.class.php");
+require_once("/sun/xampp/htdocs/foodstore/Entities/product.class.php");
+require_once("/sun/xampp/htdocs/foodstore/Entities/category.class.php");
 $cates = Category::list_category();
 
-session_start();
-
+// hien thi loi
 error_reporting(E_ALL);
 
 ini_set('display_errors','1');
@@ -15,7 +18,7 @@ if(isset($_GET["id"])){
     $was_found = false;
     $i = 0;
     if(!isset($_SESSION["cart_items"]) || count($_SESSION["cart_items"])<1){
-        $_SESSION["cart_items"] = array(0=> array(pro_id => $pro_id,"quantity"=>1));
+        $_SESSION["cart_items"] = array(0=> array("pro_id" => $pro_id,"quantity"=>1));
     }
     else{
         foreach($_SESSION["cart_items"] as $item){
@@ -38,17 +41,9 @@ if(isset($_GET["id"])){
 ?>
  <!--Thong tin tang shopping cart-->
 <div class="container text-center">
-    <div class="col-sm-3">
-        <h3>Danh mục</h3>
-        <ul class = "list-group">
-            <?php
-            foreach($cates as $item){
-                echo "<li class = 'list-group-item'><a
-                href=/foodstore/list_product.php?cateid=".$item["CateID"].">".$item["CategoryName"]."</a></li>";
-            }?>
-        </ul>
-        </div>
-    <div class="col-sm-9">
+    <!-- need to add header menu-->
+
+    <div class="col-sm-12">
         <h3>Thông tin giỏ hàng</h3><br>
         <table class="table table-condensed" >
             <thead>
@@ -74,7 +69,7 @@ if(isset($_GET["id"])){
                 </td><td>".$item["quantity"]."</td><td>".$prod["Price"]."</td><td>".$prod["Price"]."</td></tr>";
                 }
                  echo "<tr> <td colspan=5><p class='text-right text-danger'>Tổng tiền: ".$total_money."</p></td> </tr>";
-                  echo "<tr> <td colspan=3><p class='text-right'><button type='button' class='btn btn-primary'>Tiếp tục mua hàng</button></p></td>
+                  echo "<tr> <td colspan=3><p class='text-right'><button type='button' class='btn btn-primary' onclick=location.href=/foodstore/index.php >Tiếp tục mua hàng</button></p></td>
                   <td colspan=2><p class='text-right'><button type='button' class='btn btn-success'>Thanh toán</button></p></td></tr>";
                 }
                 else{

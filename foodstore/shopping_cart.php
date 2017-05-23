@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 @ob_start();
 session_start();
@@ -9,6 +10,16 @@ require_once("/sun/xampp/htdocs/foodstore/Entities/category.class.php");
 $cates = Category::list_category();
 
 // hien thi loi
+=======
+<?php include('pageheader.php');?>
+  <?php
+require_once("/xampp/htdocs/foodstore/Entities/product.class.php");
+require_once("/xampp/htdocs/foodstore/Entities/category.class.php");
+$cates = Category::list_category();
+
+#session_start();
+
+>>>>>>> a9c83b5550733140686bfffd4e68e368c2b720f5
 error_reporting(E_ALL);
 
 ini_set('display_errors','1');
@@ -18,7 +29,11 @@ if(isset($_GET["id"])){
     $was_found = false;
     $i = 0;
     if(!isset($_SESSION["cart_items"]) || count($_SESSION["cart_items"])<1){
+<<<<<<< HEAD
         $_SESSION["cart_items"] = array(0=> array("pro_id" => $pro_id,"quantity"=>1));
+=======
+        $_SESSION["cart_items"] = array(0=> array($pro_id => $pro_id,"quantity"=>1));
+>>>>>>> a9c83b5550733140686bfffd4e68e368c2b720f5
     }
     else{
         foreach($_SESSION["cart_items"] as $item){
@@ -36,7 +51,7 @@ if(isset($_GET["id"])){
             array_push($_SESSION["cart_items"], array("pro_id"=>$pro_id, "quantity"=>1));
         }
     }
-    header("location: shopping_cart.php");
+   # header("location: shopping_cart.php");
 }
 ?>
  <!--Thong tin tang shopping cart-->

@@ -1,6 +1,11 @@
 <?php
+<<<<<<< HEAD
 require_once("D:/sun/xampp/htdocs/foodstore/Entities/product.class.php");
 require_once("D:/sun/xampp/htdocs/foodstore/Entities/category.class.php");
+=======
+require_once("D:/xampp/htdocs/foodstore/Entities/product.class.php");
+require_once("D:/xampp/htdocs/foodstore/Entities/category.class.php");
+>>>>>>> a9c83b5550733140686bfffd4e68e368c2b720f5
 ?>
   <?php
 include_once("pageheader.php");

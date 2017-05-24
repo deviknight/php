@@ -1,6 +1,36 @@
 <?php
 @ob_start();
 ?>
+<?php
+require_once('Entities/product.class.php');
+require_once('Entities/category.class.php');
+require_once('Entities/orderproduct.class.php');
+
+
+if(isset($_POST["btnPay"])){
+	#$orderDate = $_POST["today"];
+	#$shipDate = $_POST["today+1"];
+	$shipName = $_POST["txtReceiver"];
+	$shipAddress = $_POST["txtAddress"];
+	
+  $orderDate = date_default_timezone_get();
+  $shipDate = date_default_timezone_get();
+	
+	$newOrderProduct = new OrderProduct($orderDate,$shipDate,$shipName,	$shipAddress);	
+	$result = $newOrderProduct->save();
+	
+	if(!$result){
+		header("Location: payment.php?failure");		
+	}
+	
+	else{
+		header("Location: payment.php?inserted");
+	}
+}
+
+?>
+
+
   <?php include_once("pageheader.php"); ?>
     <?php
 if(isset($_SESSION['user'])!="")
@@ -67,13 +97,13 @@ require_once("Entities/user.class.php");
                         <div class="form-group">
 
                           <div class="col-lg-12">
-                            <input type="email" class="form-control" name="txtAddress" placeholder="Address">
+                            <input type="text" class="form-control" name="txtAddress" placeholder="Address">
                           </div>
                         </div>
 
                         <div class="form-group">
                           <div class="col-lg-12">
-                            <input type="password" class="form-control" name="txtPhone" placeholder="Phone Number">
+                            <input type="text" class="form-control" name="txtPhone" placeholder="Phone Number">
                           </div>
                         </div>
 
@@ -112,7 +142,7 @@ require_once("Entities/user.class.php");
                         </br>
                         <div class="form-group">
                           <div class="col-lg-12">
-                            <input type="submit" name="btn-pay" value="Submit Order" class="btn btn-success" />
+                            <input type="submit" name="btnPay" value="Submit Order" class="btn btn-success" />
                           </div>
                         </div>
 

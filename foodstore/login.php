@@ -15,9 +15,9 @@
 
                       <br/>
 
-                      <form class="form-horizontal" method="post" action="./auth.php" enctype="multipart/form-data">
+                      <form class="form-horizontal" method="post" action="./auth.php" enctype="multipart/form-data">                        
+                                                
                         <div class="form-group">
-
                           <div class="col-lg-12">
                             <input type="text" class="form-control" name="txtname" placeholder="User name">
                           </div>

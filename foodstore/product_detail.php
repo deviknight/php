@@ -23,7 +23,7 @@ $cates = Category::list_category();
 <h3 class="panel-heading">Chi tiết sản phẩm</h3>
 <div class="row">
 	<div class="col-sm-6">
-		<img  src="<?php echo "/foodstore/".$prod["Picture"];?>" class="img-responsive" style="width:100%" alt="Image">
+		<img  src="<?php echo "".$prod["Picture"];?>" class="img-responsive" style="width:100%" alt="Image">
 	</div>
 	
 	<div class="col-sm-6">
@@ -40,7 +40,7 @@ $cates = Category::list_category();
 			</p>
 			
 			<p>				
-				<button type="button" class="btn btn-danger" onclick="location.href='/foodstore/shopping_cart.php?id=<?php echo
+				<button type="button" class="btn btn-danger" onclick="location.href='shopping_cart.php?id=<?php echo
                 $prod["ProductID"];?>'" >Mua Hàng</button>
 			</p>
 		</div>

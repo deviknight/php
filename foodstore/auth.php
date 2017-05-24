@@ -20,7 +20,9 @@
         else{
             //tra ve trang thong bao khong co
             //quyen truy cap
-            require './notFound.php';
+            $loginMessage ="Wrong username or password";
+            echo "<script type='text/javascript'>alert('$loginMessage');</script>";
+            require './login.php';
         }
     }
 ?>

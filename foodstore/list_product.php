@@ -25,7 +25,7 @@ $cates = Category::list_category();
 						<div class="grid">
 							<figure class="effect-apollo">
 								<?php
-										echo "<a class=example-image-link href=/foodstore/product_detail.php?id=".$item["ProductID"]." data-lightbox=example-set data-title=>";										
+										echo "<a class=example-image-link href=product_detail.php?id=".$item["ProductID"]." data-lightbox=example-set data-title=>";										
 								?>
 								<!-- <a class="example-image-link" href="google.com" data-lightbox="example-set" data-title=""> -->
 								
@@ -39,7 +39,7 @@ $cates = Category::list_category();
 								</a>
 								
 							</figure>
-							<button type="button" class="btn btn-primary" onclick="location.href='/foodstore/shopping_cart.php?id=<?php echo
+							<button type="button" class="btn btn-primary" onclick="location.href='shopping_cart.php?id=<?php echo
 
                 $item["ProductID"];?>'">Mua Hàng</button>
 

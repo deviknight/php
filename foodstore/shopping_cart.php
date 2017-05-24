@@ -44,6 +44,9 @@ if(isset($_GET["id"])){
     header("location: shopping_cart.php");
 }
 ?>
+
+<!-- gallery -->
+	<div class="gallery">	
  <!--Thong tin tang shopping cart-->
 <div class="container text-center">
     <!-- need to add header menu-->
@@ -89,14 +92,13 @@ if(isset($_GET["id"])){
                 }
                 ?>
                 <tr> 
-                    <td colspan=3><p class="text-right"><button type="button" class="btn btn-primary" onclick="location.href=/foodstore/index.php">Tiếp tục mua hàng</button></p></td>
-                    <td colspan=2><p class='text-right'><button type='button' class='btn btn-success' name="btnAddToCart">Thanh toán</button></p></td>
+                    <td colspan=3><p class="text-right"><button type="button" class="btn btn-primary" onclick="location.href='list_product.php';">Tiếp tục mua hàng</button></p></td>
+                    <td colspan=2><p class='text-right'><button type='button' class='btn btn-success'  onclick="location.href='payment.php';"  name="btnAddToCart">Thanh toán</button></p></td>
                     <!-- https://www.codecademy.com/en/forum_questions/5314dc879c4e9d517a000d6d -->
                 </tr>
-        </tbody>
-        
+        </tbody>        
           </table>          
     </div>
     </div>
-
+</div>
     <?php include_once('footer.php');?>

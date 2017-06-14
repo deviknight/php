@@ -2,9 +2,6 @@
 
 require_once('config/db.class.php');
 
-require_once('config/db.class.php');
-
-
 class Product
 {
 	public $productID;
@@ -67,6 +64,7 @@ class Product
 		$result = $db->select_to_array($sql);
 		return $result;
 	}
+	
 }
 
 ?>

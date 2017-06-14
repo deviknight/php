@@ -20,6 +20,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link rel="stylesheet" href="css/lightbox.css">
 
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/customstyle.css" rel="stylesheet" type="text/css" media="all" />
 <link href="css/font-awesome.css" rel="stylesheet"> 
 <!--web-fonts-->
 <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
@@ -27,6 +28,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="//fonts.googleapis.com/css?family=Tangerine:400,700" rel="stylesheet">
 <!--//web-fonts-->
 </head>
+<?php 
+@ob_start(); 
+#session_start();
+?>
 <body>
 <!-- banner -->
 	<div class="banner inner-bg-w3" id="home">
@@ -42,8 +47,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<div class="contact-bnr-w3-agile">
 				<ul>
-					<li><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">INFO@EXAMPLE.COM</a></li>
-					<li><i class="fa fa-phone" aria-hidden="true"></i>+1 (100)222-23-33</li>	
+					<li><i class="fa fa-cart-arrow-down" aria-hidden="true"></i><a href="shopping_cart.php">My Cart</a></li>
+					<li><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:nhuthm080280@gmail.com">Mail to Store</a></li>
+					<li><i class="fa fa-phone" aria-hidden="true"></i>+84 939 332 766</li>	
 					<li>
 						<div class="search">
 							<input class="search_box" type="checkbox" id="search_box">
@@ -88,7 +94,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<li class="dropdown menu__item">
 						<a href="#" class="dropdown-toggle menu__link"  data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="login.php">Login</a></li>
+							<li>
+							
+							<?php
+								
+								if(isset($_SESSION['memberCode']) != ""){
+									echo "<a>" . $_SESSION["memberCode"] . "</a>";
+								}
+								else {
+									echo "<a href=login.php>Login</a>";
+								}
+							?>
+							
+							</li>
 							<li><a href="register.php">Register</a></li>
 							<li><a href="logout.php">Log out</a></li>
 						</ul>

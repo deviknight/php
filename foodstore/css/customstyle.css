@@ -1,0 +1,122 @@
+.agileits-social ul {
+          padding: 0;
+          margin: 0;
+        }
+        
+        .agileits-social ul li {
+          display: inline-block;
+          margin-right: 53px;
+        }
+        
+        .agileits-social ul li a {
+          color: #333;
+          text-align: center;
+        }
+        
+        .agileits-social ul li a i.fa.fa-facebook {
+          height: 30px;
+          width: 30px;
+          background: #a6b5c5;
+          line-height: 30px;
+          color: #000618;
+          border-radius: 50%;
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
+          -o-border-radius: 50%;
+          -ms-border-radius: 50%;
+          transition: 0.5s all;
+          -webkit-transition: 0.5s all;
+          -moz-transition: 0.5s all;
+          -o-transition: 0.5s all;
+          -ms-transition: 0.5s all;
+        }
+        
+        .agileits-social ul li a i.fa.fa-facebook:hover {
+          height: 30px;
+          width: 30px;
+          line-height: 30px;
+          background: #3b5998;
+          color: #fff;
+        }
+        
+        .agileits-social ul li a i.fa.fa-twitter {
+          height: 30px;
+          width: 30px;
+          background: #a6b5c5;
+          line-height: 30px;
+          color: #000618;
+          border-radius: 50%;
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
+          -o-border-radius: 50%;
+          -ms-border-radius: 50%;
+          transition: 0.5s all;
+          -webkit-transition: 0.5s all;
+          -moz-transition: 0.5s all;
+          -o-transition: 0.5s all;
+          -ms-transition: 0.5s all;
+        }
+        
+        .agileits-social ul li a i.fa.fa-twitter:hover {
+          height: 30px;
+          width: 30px;
+          line-height: 30px;
+          background: #1da1f2;
+          color: #fff;
+        }
+        
+        .agileits-social ul li a i.fa.fa-rss {
+          height: 30px;
+          width: 30px;
+          background: #a6b5c5;
+          line-height: 30px;
+          color: #000618;
+          border-radius: 50%;
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
+          -o-border-radius: 50%;
+          -ms-border-radius: 50%;
+          transition: 0.5s all;
+          -webkit-transition: 0.5s all;
+          -moz-transition: 0.5s all;
+          -o-transition: 0.5s all;
+          -ms-transition: 0.5s all;
+        }
+        
+        .agileits-social ul li a i.fa.fa-rss:hover {
+          height: 30px;
+          width: 30px;
+          line-height: 30px;
+          background: #f26522;
+          color: #fff;
+        }
+        
+        .agileits-social ul li a i.fa.fa-vk {
+          height: 30px;
+          width: 30px;
+          background: #a6b5c5;
+          line-height: 30px;
+          color: #000618;
+          border-radius: 50%;
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
+          -o-border-radius: 50%;
+          -ms-border-radius: 50%;
+          transition: 0.5s all;
+          -webkit-transition: 0.5s all;
+          -moz-transition: 0.5s all;
+          -o-transition: 0.5s all;
+          -ms-transition: 0.5s all;
+        }
+        
+        .agileits-social ul li a i.fa.fa-vk:hover {
+          height: 30px;
+          width: 30px;
+          line-height: 30px;
+          background: #45668e;
+          color: #fff;
+        }
+        
+        .agileits-social ul li:nth-child(4) {
+          margin-right: 0;
+        }

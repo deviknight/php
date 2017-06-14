@@ -12,21 +12,15 @@ if(isset($_POST["btnSubmit"])){
 	$picture = $_FILES["txtPicture"];
 	
 	
-	$newProduct = new Product($productName,$cateID,$price,$quantity,$description,$picture);	
-	$result = $newProduct->save();
+	//$newProduct = new Product($productName,$cateID,$price,$quantity,$description,$picture);	
+	$result = Product::update();
 	
 	if(!$result){
-		header("Location: add_product.php?failure");
-		echo $productName;
-		echo $cateID;
-		echo $price;
-		echo $quantity;
-		echo $description;
-		echo $picture;
+		header("Location: adm_update_product.php?failure");
 	}
 	
 	else{
-		header("Location: add_product.php?inserted");
+		header("Location: adm_update_product.php?updated");
 	}
 }
 
@@ -34,15 +28,15 @@ if(isset($_POST["btnSubmit"])){
 
 <?php include_once("pageheader.php");?>
 <?php
-	if(isset($_GET["inserted"])){
-		echo "<h2>Thêm sản phẩm thành công</h2>";
+	if(isset($_GET["updated"])){
+		echo "<h2>Cập nhật sản phẩm thành công</h2>";
 	}
 ?>
 
  <!-- gallery -->
     <div class="gallery">
 <div class="container text-center">
-  <h2>Thêm sản phẩm</h2>
+  <h2>Cập nhật sản phẩm</h2>
 <form  class="form-horizontal" method="post" enctype="multipart/form-data">
 	<div class="form-group">		
 			<label class="control-label col-sm-2">Tên sản phẩm</label>						

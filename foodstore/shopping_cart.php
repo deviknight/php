@@ -53,7 +53,7 @@ if(isset($_GET["id"])){
 
     <div class="col-sm-12">
         <h3>Thông tin giỏ hàng</h3><br>
-        <table class="table table-condensed" >
+        <table class="table table-condensed" id="table" >
             <thead>
                 <tr>
                 <th>Tên sản phẩm</th>
@@ -73,19 +73,25 @@ if(isset($_GET["id"])){
                 $product = Product::get_product($id);
                 $prod = reset($product);
                 $total_money +=$item["quantity"]*$prod["Price"];
+                $thanhtien = $item["quantity"]*$prod["Price"];
                 echo "<tr>
                 <td>".$prod["ProductName"]."</td><td><img style='width:90px; height:80px' src=".$prod["Picture"]."
                 </td>                
                 <td>
-                <input type=number required value='".$item["quantity"]."'/>
+                <input type=number id=quantity required value='".$item["quantity"]."'/>
                 </td>
                 
-                <td>".$prod["Price"]."</td><td>".$prod["Price"]."</td>
+                <td><span id=price>".$prod["Price"]."</span></td>
+                 <td>
+                 <span id=total_price>".$thanhtien."</span>
+                 
+                 </td>
                 </tr>";
                 }
-                 echo "<tr> <td colspan=5><p class='text-right text-danger'>Tổng tiền: ".$total_money."</p></td> </tr>";
+                 echo "<tr> <td colspan=5><p class='text-right text-danger' >Tổng tiền: ".$total_money."</p></td> </tr>";
                   #echo "<tr> <td colspan=3><p class='text-right'><button type='button' class='btn btn-primary' onclick=location.href=/foodstore/index.php >Tiếp tục mua hàng</button></p></td>
                   #<td colspan=2><p class='text-right'><button type='button' class='btn btn-success'>Thanh toán</button></p></td></tr>";
+                 
                 }
                 else{
                     echo "Không có sản phẩm nào trong giỏ hàng!!!";
@@ -93,8 +99,9 @@ if(isset($_GET["id"])){
                 ?>
                 <tr> 
                     <td colspan=3><p class="text-right"><button type="button" class="btn btn-primary" onclick="location.href='list_product.php';">Tiếp tục mua hàng</button></p></td>
-                    <td colspan=2><p class='text-right'><button type='button' class='btn btn-success'  onclick="location.href='payment.php';"  name="btnAddToCart">Thanh toán</button></p></td>
+                    <td colspan=2><p class='text-right'><button type='button' class='btn btn-success'  onclick="location.href='payment.php';"  name="btnAddToCart">Thanh toán</button></p></td>                   
                     <!-- https://www.codecademy.com/en/forum_questions/5314dc879c4e9d517a000d6d -->
+                    
                 </tr>
         </tbody>        
           </table>          
@@ -102,3 +109,20 @@ if(isset($_GET["id"])){
     </div>
 </div>
     <?php include_once('footer.php');?>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script> 
+            var myTable = document.getElementById('table');
+            var rowLength = table.rows.length;
+
+            for(var i=0; i<rowLength; i+=1){
+                var row = table.rows[i];
+                  
+            }
+
+            $("#quantity").on("change",function(){
+            quantity=$(this).val();
+            var price = $('#price').text();
+            total_price=price*quantity;
+            $("#total_price").html(total_price);
+            })
+    </script>

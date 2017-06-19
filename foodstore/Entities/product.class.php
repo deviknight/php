@@ -64,6 +64,15 @@ class Product
 		$result = $db->select_to_array($sql);
 		return $result;
 	}
+
+	public static function get_proIdbyCode($code){
+		$db = new Db();
+		$sql="select ProductID from product where code='$code'";
+		$row = $db->query_execute($sql);
+		$id = $_GET['ProductID'];
+		return $id;
+	}
+	
 	
 }
 

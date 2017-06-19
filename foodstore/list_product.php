@@ -12,19 +12,20 @@ if(!empty($_GET["action"])) {
                 $productByCode = $db_handle->runQuery("SELECT * FROM product WHERE code='" . $_GET["code"] . "'");
                 $itemArray = array($productByCode[0]["code"]=>array('ProductName'=>$productByCode[0]["ProductName"], 'code'=>$productByCode[0]["code"], 'quantity'=>$_POST["quantity"], 'Price'=>$productByCode[0]["Price"]));
                 
-                if(!empty($_SESSION["cart_item"])) {
-                    if(in_array($productByCode[0]["code"],$_SESSION["cart_item"])) {
-                        foreach($_SESSION["cart_item"] as $k => $v) {
+                if(!empty($_SESSION["cart_items"])) {
+                    if(in_array($productByCode[0]["code"],$_SESSION["cart_items"])) {
+                        foreach($_SESSION["cart_items"] as $k => $v) {
                             if($productByCode[0]["code"] == $k)
-                            $_SESSION["cart_item"][$k]["quantity"] = $_POST["quantity"];
+                            $_SESSION["cart_items"][$k]["quantity"] = $_POST["quantity"];
                     }
                 } else {
-                    $_SESSION["cart_item"] = array_merge($_SESSION["cart_item"],$itemArray);
+                    $_SESSION["cart_items"] = array_merge($_SESSION["cart_items"],$itemArray);
                 }
             } else {
-                $_SESSION["cart_item"] = $itemArray;
+                $_SESSION["cart_items"] = $itemArray;
             }
         }
+        
         break;
 }
 }
@@ -46,15 +47,14 @@ $cates = Category::list_category();
     <!-- gallery -->
     <?php
 $session_items = 0;
-if(!empty($_SESSION["cart_item"])){
-    $session_items = count($_SESSION["cart_item"]);
+if(!empty($_SESSION["cart_items"])){
+    $session_items = count($_SESSION["cart_items"]);
 }
 ?>
 
-      <div class="gallery">
-        <a href="shopping_cart.php" title="Cart">View Cart</a>
-        <br> Total Items =
-        <?php echo $session_items; ?>
+      <div class="gallery">        
+        <!--<br> Total Items =
+        <?php echo $session_items; ?>-->
           <div class="container">
             <h2 class="tittle-w3">Gallery</h2>
             <div class="gallery-grids">
@@ -66,7 +66,7 @@ if (!empty($product_array)) {
     foreach($product_array as $key=>$value){
         ?>
                 <div class="col-md-4 gallery-grid wow fadeInUp animated" data-wow-delay=".5s">
-                  <form method="post" action="list_product.php?action=add&code=<?php echo $product_array[$key]["code"]; ?>">
+                  <form method="post" action="list_product.php?cateid=<?php echo $cateid ?>&action=add&code=<?php echo $product_array[$key]["code"]; ?>" >
                     <div class="grid">
                       <figure class="effect-apollo">
 

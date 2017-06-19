@@ -3,6 +3,8 @@
 session_start();
 ?>
   <?php
+  require_once("dbcontroller.php");
+$db_handle = new DBController();
 require_once('Entities/product.class.php');
 require_once('Entities/category.class.php');
 require_once('Entities/orderproduct.class.php');
@@ -34,37 +36,48 @@ if(isset($_POST["btnPay"])){
     
     else{
         header("Location: payment.php?inserted");
+        
     }
 }
 
-
-if(isset($_GET["id"])){
-    $pro_id = $_GET["id"];
-    $was_found = false;
-    $i = 0;
-    if(!isset($_SESSION["cart_items"]) || count($_SESSION["cart_items"])<1){
-        
-        $_SESSION["cart_items"] = array(0=> array("pro_id" => $pro_id,"quantity"=>1));
-        
-    }
-    else{
-        foreach($_SESSION["cart_items"] as $item){
-            $i++;
-            while(list($key,$value)=each($item)){
-                if($key=="pro_id" && $value==$pro_id)
-                {
-                    array_splice($_SESSION["cart_items"], $i-1,1, array(array("pro_id"=>$pro_id, "quantity"=>
-                    $item["quantity"]+1)));
-                    $was_found = true;
-                }
+if(!empty($_GET["action"])) {
+    switch($_GET["action"]) {
+        case "remove":
+            if(!empty($_SESSION["cart_items"])) {
+                foreach($_SESSION["cart_items"] as $k => $v) {
+                    if($_GET["code"] == $k)
+                    unset($_SESSION["cart_items"][$k]);
+                    if(empty($_SESSION["cart_items"]))
+                    unset($_SESSION["cart_items"]);
             }
         }
-        if($was_found==false){
-            array_push($_SESSION["cart_items"], array("pro_id"=>$pro_id, "quantity"=>1));
+        break;
+    case "empty":
+        unset($_SESSION["cart_items"]);
+        break;
+    case "edit":
+        $total_price = 0;
+        foreach ($_SESSION['cart_items'] as $k => $v) {
+            if($_POST["code"] == $k) {
+                if($_POST["quantity"] == '0') {
+                    unset($_SESSION["cart_items"][$k]);
+            } else {
+                $_SESSION['cart_items'][$k]["quantity"] = $_POST["quantity"];
+            }
         }
+        $total_price += $_SESSION['cart_items'][$k]["Price"] * $_SESSION['cart_items'][$k]["quantity"];
+        
     }
-    header("location: shopping_cart.php");
+    if($total_price!=0 && is_numeric($total_price)) {
+        print "$" . number_format($total_price,2);
+        exit;
+    }
+    break;
 }
+}
+
+
+
 
 ?>
 
@@ -118,6 +131,19 @@ require_once("Entities/user.class.php");
         <!-- gallery -->
         <div class="gallery">
           <div class="container-fluid">
+            <div class="row">
+              
+                
+              <?php
+                	if(isset($_GET["inserted"])){
+		          echo '<script language="javascript">';
+                    echo 'alert("Đặt hàng thành công"); location.href="gallery.php"';
+                  echo '</script>';
+              
+                    unset($_SESSION["cart_items"]);
+	            }
+?>
+            </div>
             <div class="row">
               <div class="col-md-6">
                 <h3>Địa chỉ giao hàng của quý khách</h3>
@@ -204,36 +230,45 @@ require_once("Entities/user.class.php");
                   </thead>
                   <form  method="post" enctype="multipart/form-data">
                   <tbody style="text-align:left">
+                       <?php
+$total_price = 0.00;
+if(isset($_SESSION["cart_items"])){
+    ?>
+                  <?php foreach ($_SESSION["cart_items"] as $item) {
+        $product_info = $db_handle->runQuery("SELECT * FROM product WHERE code = '" . $item["code"] . "'");
+        $total_price += $item["Price"] * $item["quantity"];
+        ?>
+                    <div class="product-item" onMouseOver="document.getElementById('remove<?php echo $item["code"]; ?>').style.display='block';" onMouseOut="document.getElementById('remove<?php echo $item["code"]; ?>').style.display='';">                      
+                    </div>
+					<tr>
+						<td><?php echo $item["ProductName"]; ?></td>
+						
+						<td><input type="number" name="quantity" id="<?php echo $item["code"]; ?>" value="<?php echo $item["quantity"]; ?>" size="2" onBlur="saveCart(this);" /></td>
+						<td><?php echo "$".$item["Price"]; ?></td>
+						
+						<td><div class="btnRemoveAction" id="remove<?php echo $item["code"]; ?>"><a href="payment.php?action=remove&code=<?php echo $item["code"]; ?>" title="Remove from Cart">x</a></div></td>
+					</tr>
                     <?php
-$total_money = 0;
-if(isset($_SESSION["cart_items"]) && count($_SESSION["cart_items"])>0)
-{
-    foreach($_SESSION["cart_items"] as $item){
-        $id = $item["pro_id"];
-        $product = Product::get_product($id);
-        $prod = reset($product);
-        $total_money +=$item["quantity"]*$prod["Price"];
-        echo "<tr>
-        <td>
-        ".$prod["ProductName"]." </br>
-        ".$prod["Description"]."</td>        
-        <td>
-        <input type=number required value='".$item["quantity"]."'/>
-        </td>
-        
-        <td>".$prod["Price"]."</td>
-        
-        </tr>";
     }
-    echo "<tr> <td colspan=5><p class='text-right text-danger'>Tổng tiền: ".$total_money."</p></td> </tr>";
-    #echo "<tr> <td colspan=3><p class='text-right'><button type='button' class='btn btn-primary' onclick=location.href=/foodstore/index.php >Tiếp tục mua hàng</button></p></td>
-    #<td colspan=2><p class='text-right'><button type='button' class='btn btn-success'>Thanh toán</button></p></td></tr>";
-}
-else{
-    echo "Không có sản phẩm nào trong giỏ hàng!!!";
 }
 ?>
+                      <tr>
+					  	<td colspan=6><p id="total_price" class='text-right text-danger' ><?php echo "$". number_format($total_price,2); ?></p></td>
+					  </tr>					  
+					  <tr>
+                        <td colspan=3>
+                          <p class="text-right">
+                            <button type="button" class="btn btn-primary" onclick="location.href='gallery.php';">Tiếp tục mua hàng</button>
+                          </p>
+                        </td>
+                        <td colspan=3>
+                          <p class='text-right'>
+                            <button type='button' class='btn btn-success' onclick="location.href='payment.php';" name="btnAddToCart">Thanh toán</button>
+                          </p>
+                        </td>
+                        <!-- https://www.codecademy.com/en/forum_questions/5314dc879c4e9d517a000d6d -->
 
+                      </tr>
                   </tbody>
                   </form>
                 </table>

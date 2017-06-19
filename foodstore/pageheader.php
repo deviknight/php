@@ -47,7 +47,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<div class="contact-bnr-w3-agile">
 				<ul>
-					<li><i class="fa fa-cart-arrow-down" aria-hidden="true"></i><a href="shopping_cart.php">My Cart</a></li>
+					<li>
+					<i class="fa fa-cart-arrow-down" aria-hidden="true"></i><a href="shopping_cart.php">My Cart
+					<!--<?php
+					if(!empty($_SESSION["cart_items"])){
+    					$session_items = count($_SESSION["cart_items"]);
+						echo $session_items;
+					}
+					else {
+						echo "No items";	
+					}
+					?>-->
+					 
+					</a>
+					
+					</li>
 					<li><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:nhuthm080280@gmail.com">Mail to Store</a></li>
 					<li><i class="fa fa-phone" aria-hidden="true"></i>+84 939 332 766</li>	
 					<li>

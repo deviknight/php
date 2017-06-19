@@ -30,11 +30,15 @@ class OrderProduct
             if(isset($_SESSION["cart_items"]) && count($_SESSION["cart_items"])>0)
             {
                 foreach($_SESSION["cart_items"] as $item){
-                    $id = $item["pro_id"];                    
-                    $total_money +=$item["quantity"]*$prod["Price"];
+                    $code = $item["code"];
+
+                    #$id = $item["pro_id"];
+                    $id = Product::get_proIdbyCode($code);
+                    $id = 18;
+                    #$total_money +=$item["quantity"]*$prod["Price"];
                     $quantiy = $item["quantity"];                    
                     $sql1 = "INSERT INTO orderdetail (OrderID,ProductID,Quantity) VALUES ('".$orderID."','".$id."', '".$quantiy."')";
-					 $result1 = $db->query_execute($sql1);
+					$result1 = $db->query_execute($sql1);
 
                     
                                                             

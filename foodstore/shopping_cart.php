@@ -7,29 +7,29 @@ require_once('Entities/category.class.php');
 if(!empty($_GET["action"])) {
     switch($_GET["action"]) {
         case "remove":
-            if(!empty($_SESSION["cart_item"])) {
-                foreach($_SESSION["cart_item"] as $k => $v) {
+            if(!empty($_SESSION["cart_items"])) {
+                foreach($_SESSION["cart_items"] as $k => $v) {
                     if($_GET["code"] == $k)
-                    unset($_SESSION["cart_item"][$k]);
-                    if(empty($_SESSION["cart_item"]))
-                    unset($_SESSION["cart_item"]);
+                    unset($_SESSION["cart_items"][$k]);
+                    if(empty($_SESSION["cart_items"]))
+                    unset($_SESSION["cart_items"]);
             }
         }
         break;
     case "empty":
-        unset($_SESSION["cart_item"]);
+        unset($_SESSION["cart_items"]);
         break;
     case "edit":
         $total_price = 0;
-        foreach ($_SESSION['cart_item'] as $k => $v) {
+        foreach ($_SESSION['cart_items'] as $k => $v) {
             if($_POST["code"] == $k) {
                 if($_POST["quantity"] == '0') {
-                    unset($_SESSION["cart_item"][$k]);
+                    unset($_SESSION["cart_items"][$k]);
             } else {
-                $_SESSION['cart_item'][$k]["quantity"] = $_POST["quantity"];
+                $_SESSION['cart_items'][$k]["quantity"] = $_POST["quantity"];
             }
         }
-        $total_price += $_SESSION['cart_item'][$k]["Price"] * $_SESSION['cart_item'][$k]["quantity"];
+        $total_price += $_SESSION['cart_items'][$k]["Price"] * $_SESSION['cart_items'][$k]["quantity"];
         
     }
     if($total_price!=0 && is_numeric($total_price)) {
@@ -66,9 +66,9 @@ if(!empty($_GET["action"])) {
               <tbody style="text-align:left">
                 <?php
 $total_price = 0.00;
-if(isset($_SESSION["cart_item"])){
+if(isset($_SESSION["cart_items"])){
     ?>
-                  <?php foreach ($_SESSION["cart_item"] as $item) {
+                  <?php foreach ($_SESSION["cart_items"] as $item) {
         $product_info = $db_handle->runQuery("SELECT * FROM product WHERE code = '" . $item["code"] . "'");
         $total_price += $item["Price"] * $item["quantity"];
         ?>

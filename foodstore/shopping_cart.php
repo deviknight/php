@@ -59,8 +59,8 @@ if(!empty($_GET["action"])) {
                   <th>Hình ảnh</th>
                   <th>Số lượng</th>
                   <th>Đơn giá</th>
-                  <th>Thành tiền</th>
-				  <th>Xóa</th>
+                  <!--<th>Thành tiền</th>-->
+                  <th>Xóa</th>
                 </tr>
               </thead>
               <tbody style="text-align:left">
@@ -71,25 +71,44 @@ if(isset($_SESSION["cart_items"])){
                   <?php foreach ($_SESSION["cart_items"] as $item) {
         $product_info = $db_handle->runQuery("SELECT * FROM product WHERE code = '" . $item["code"] . "'");
         $total_price += $item["Price"] * $item["quantity"];
+        
         ?>
-                    <div class="product-item" onMouseOver="document.getElementById('remove<?php echo $item["code"]; ?>').style.display='block';" onMouseOut="document.getElementById('remove<?php echo $item["code"]; ?>').style.display='';">                      
+                    <div class="product-item" onMouseOver="document.getElementById('remove<?php echo $item["code"]; ?>').style.display='block';" onMouseOut="document.getElementById('remove<?php echo $item["code"]; ?>').style.display='';">
                     </div>
-					<tr>
-						<td><?php echo $item["ProductName"]; ?></td>
-						<td><img style='width:90px; height:80px' src="<?php echo $product_info[0]["Picture"]; ?>"></td>
-						<td><input type="number" name="quantity" id="<?php echo $item["code"]; ?>" value="<?php echo $item["quantity"]; ?>" size="2" onBlur="saveCart(this);" /></td>
-						<td><?php echo "$".$item["Price"]; ?></td>
-						<td id="total_price_item"><?php echo $item["Price"] * $item["quantity"]?></td>
-						<td><div class="btnRemoveAction" id="remove<?php echo $item["code"]; ?>"><a href="shopping_cart.php?action=remove&code=<?php echo $item["code"]; ?>" title="Remove from Cart">x</a></div></td>
-					</tr>
+                    <tr>
+                      <td>
+                        <?php echo $item["ProductName"]; ?>
+                      </td>
+                      <td><img style='width:90px; height:80px' src="<?php echo $product_info[0]["Picture"]; ?>"></td>
+                      <td>
+                        <input type="number" min="1" step="1" name="quantity" id="<?php echo $item["code"]; ?>" value="<?php echo $item["quantity"]; ?>" size="2" onBlur="saveCart(this);" />
+                      </td>
+                      <td>
+                        <?php echo "$".$item["Price"]; ?>
+                      </td>
+                      <!--<td>
+        <p id="total_price_item">
+        <?php
+        $current_price = $item["Price"];
+        echo $current_price * $item["quantity"]?>
+        </p>
+        </td>-->
+                      <td>
+                        <div class="btnRemoveAction" id="remove<?php echo $item["code"]; ?>"><a href="shopping_cart.php?action=remove&code=<?php echo $item["code"]; ?>" title="Remove from Cart">x</a></div>
+                      </td>
+                    </tr>
                     <?php
     }
 }
 ?>
                       <tr>
-					  	<td colspan=6><p id="total_price" class='text-right text-danger' ><?php echo "$". number_format($total_price,2); ?></p></td>
-					  </tr>					  
-					  <tr>
+                        <td colspan=6>
+                          <p id="total_price" class='text-right text-danger'>
+                            <?php echo "$". number_format($total_price,2); ?>
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
                         <td colspan=3>
                           <p class="text-right">
                             <button type="button" class="btn btn-primary" onclick="location.href='list_product.php';">Tiếp tục mua hàng</button>
@@ -112,6 +131,8 @@ if(isset($_SESSION["cart_items"])){
     <?php include_once('footer.php');?>
 
       <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
       <script>
         function saveCart(obj) {
           var quantity = $(obj).val();
@@ -122,11 +143,25 @@ if(isset($_SESSION["cart_items"])){
             data: 'code=' + code + '&quantity=' + quantity,
             success: function(data, status) {
               $("#total_price").html(data)
-			  //$("#total_price_item").html(data)
+              $("#total_price_item").html(data)
             },
             error: function() {
               alert("Problem in sending reply!")
             }
           });
         }
+
+        // just for the demos, avoids form submit
+        jQuery.validator.setDefaults({
+          debug: true,
+          success: "valid"
+        });
+        $("#frmCartEdit").validate({
+          rules: {
+            field: {
+              required: true,
+              digits: true
+            }
+          }
+        });
       </script>
